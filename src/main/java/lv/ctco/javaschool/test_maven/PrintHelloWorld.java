@@ -10,33 +10,44 @@ public class PrintHelloWorld {
     public static void main(String[] args) {
 
         System.out.println("Hello World!");
-        Scanner scan = new Scanner(System.in);
-        String word = scan.nextLine();
-        char[] array = new char[word.length()];
-        findAnagram(array);
+        //Scanner scan = new Scanner(System.in);
+        //String word = scan.nextLine();
+        char[] array = {'f', 'o', 'x'};
+        System.out.println(findAnagram(array));
     }
 
-    private static void findAnagram(char[] array) {
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array.length; j++) {
-                if (array[i] == array[j]) {
-                    continue;
-                } else {
-                    char tmp=array[0];
-                    array[0]=array[1];
-                    array[1]=array[2];
-                    array[2]=array[3];
-                    array[3]=tmp;
+    static List<String> findAnagram(char[] array) {
+        String anagram;
+        List<String> anagramList = new ArrayList<String>();
+        if (array.length == 1) {
+            anagram = String.valueOf(array);
+            anagramList.add(anagram);
+        } else {
+            for (int i = 0; i < array.length; i++) {
+                for (int j = 0; j < array.length - 1; j++) {
+                    if (array[i] == array[j]) {
+                        continue;
+                    } else {
 
+                        char tmp = array[i];
+                        array[i] = array[j];
+                        array[j] = tmp;
+                        anagram = String.valueOf(array);
+                        anagramList.add(anagram);
+
+
+                    }
                 }
-                System.out.println(array);
+                char tmp = array[1];
+                array[1] = array[2];
+                array[2] = tmp;
+                anagram = String.valueOf(array);
+                anagramList.add(anagram);
 
 
             }
-
         }
-
-
+        return anagramList;
     }
 
 }
